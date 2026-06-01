@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dónde aprender en internet</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f0e8;
+    --ink: #1a1410;
+    --paper: #fdfaf4;
+    --accent: #c84b2f;
+    --accent2: #2d6a4f;
+    --accent3: #e9762b;
+    --muted: #8a7e72;
+    --border: #d9cfc0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    padding: 2rem 1rem 4rem;
+  }
+
+  header {
+    max-width: 820px;
+    margin: 0 auto 3rem;
+    text-align: center;
+    padding: 3rem 2rem;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--ink);
+    position: relative;
+  }
+
+  header::before {
+    content: "📚";
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  h1 span { color: var(--accent); }
+
+  .subtitle {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  .intro-box {
+    max-width: 820px;
+    margin: 0 auto 3rem;
+    background: var(--accent);
+    color: white;
+    padding: 1.5rem 2rem;
+    border: 2px solid var(--ink);
+    box-shadow: 5px 5px 0 var(--ink);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .intro-box strong { font-weight: 500; }
+
+  .grid {
+    max-width: 820px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .card {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    box-shadow: 5px 5px 0 var(--ink);
+    overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 var(--ink);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.4rem 1.6rem 1rem;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .card-emoji {
+    font-size: 2rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .card-title-block { flex: 1; }
+
+  .card-number {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+  }
+
+  .card-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    line-height: 1.2;
+    margin-bottom: 0.3rem;
+  }
+
+  .card-tagline {
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+
+  .toggle-btn {
+    background: none;
+    border: 1.5px solid var(--border);
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 4px;
+    transition: background 0.15s;
+  }
+
+  .toggle-btn:hover { background: var(--bg); }
+
+  .card-body {
+    padding: 0 1.6rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.2s;
+  }
+
+  .card-body.open {
+    max-height: 1000px;
+    padding: 1.2rem 1.6rem 1.6rem;
+  }
+
+  .use-when {
+    background: var(--bg);
+    border-left: 3px solid var(--accent3);
+    padding: 0.7rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.88rem;
+  }
+
+  .use-when strong {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 0.2rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent3);
+  }
+
+  .resources-title {
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 0.7rem;
+  }
+
+  .resource-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .resource-tag {
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 0.82rem;
+    padding: 0.25rem 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+
+  .resource-tag.sub {
+    background: transparent;
+    border: 1.5px solid var(--border);
+    color: var(--ink);
+    font-size: 0.78rem;
+  }
+
+  .tip {
+    font-size: 0.85rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    padding-top: 0.8rem;
+    margin-top: 0.8rem;
+  }
+
+  .tip strong {
+    color: var(--accent2);
+    font-weight: 500;
+  }
+
+  footer {
+    max-width: 820px;
+    margin: 3rem auto 0;
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+  }
+
+  @media (max-width: 500px) {
+    .card-header { padding: 1rem; }
+    .card-body.open { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>¿Dónde aprender <span>en internet?</span></h1>
+  <p class="subtitle">Una guía clara para quienes quieren saber más y no saben por dónde empezar</p>
+</header>
+
+<div class="intro-box">
+  <strong>¿Para qué sirve esta guía?</strong> Internet está lleno de información, pero no toda es igual de fiable ni sirve para lo mismo. Esta guía te explica los distintos <em>tipos</em> de recursos que existen, cuándo usar cada uno y cuáles son los más conocidos en cada categoría. Haz clic en cada tarjeta para ver los detalles.
+</div>
+
+<div class="grid" id="grid"></div>
+
+<footer>Recursos ordenados por tipo · Para aprendizaje autodidacta</footer>
+
+<script>
+const data = [
+  {
+    emoji: "📖",
+    title: "Enciclopedias y referencias",
+    tagline: "Para entender un concepto rápido",
+    useWhen: "Quieres saber qué es algo, tener una primera explicación general o verificar un dato básico.",
+    resources: ["Wikipedia", "Britannica", "Stanford Encyclopedia of Philosophy"],
+    sub: [],
+    tip: "Consejo: Wikipedia es un buen punto de partida, pero para trabajos serios busca las fuentes que ella misma cita al final del artículo."
+  },
+  {
+    emoji: "🔬",
+    title: "Buscadores académicos",
+    tagline: "Para investigar con fuentes fiables",
+    useWhen: "Necesitas información verificada por expertos: artículos científicos, estudios, investigaciones universitarias.",
+    resources: ["Google Scholar", "JSTOR", "PubMed", "arXiv.org", "ResearchGate", "SciELO", "Dialnet"],
+    sub: [],
+    tip: "Consejo: Google Scholar es el más sencillo para empezar. Si un artículo es de pago, busca el título en arXiv o ResearchGate; muchos autores lo suben gratis."
+  },
+  {
+    emoji: "🎓",
+    title: "Cursos en línea (MOOCs)",
+    tagline: "Para aprender paso a paso con estructura",
+    useWhen: "Quieres aprender una materia entera de forma ordenada, con ejercicios y, a veces, certificado.",
+    resources: ["Coursera", "edX", "Udemy", "Khan Academy", "MIT OpenCourseWare"],
+    sub: [],
+    tip: "Consejo: Khan Academy es 100 % gratuita y excelente para matemáticas y ciencias desde nivel básico. Coursera y edX tienen cursos de universidades reales (muchos gratis si no necesitas certificado)."
+  },
+  {
+    emoji: "▶️",
+    title: "Vídeos educativos",
+    tagline: "Para aprender viendo y escuchando",
+    useWhen: "Prefieres que te expliquen las cosas en vídeo, con animaciones o ejemplos visuales.",
+    resources: ["YouTube"],
+    sub: ["CrashCourse (resúmenes de historia, ciencia, literatura)", "Kurzgesagt (ciencia y filosofía animada)", "3Blue1Brown (matemáticas visuales)", "PBS Eons (paleontología y evolución)"],
+    tip: "Consejo: YouTube tiene contenido de todo tipo. Busca canales especializados en vez de vídeos sueltos; así garantizas calidad y coherencia."
+  },
+  {
+    emoji: "🏛️",
+    title: "Bibliotecas y archivos digitales",
+    tagline: "Para acceder a libros, documentos históricos y cultura",
+    useWhen: "Buscas libros digitales gratuitos, documentos históricos, fotografías de archivo o publicaciones antiguas.",
+    resources: ["Internet Archive", "Project Gutenberg", "Google Books", "Europeana", "Biblioteca Digital Hispánica", "Gallica", "Flickr Commons"],
+    sub: [],
+    tip: "Consejo: Project Gutenberg tiene miles de clásicos literarios gratis y legalmente. Internet Archive guarda también páginas web antiguas (útil para investigar)."
+  },
+  {
+    emoji: "💬",
+    title: "Foros y comunidades",
+    tagline: "Para preguntar, debatir y aprender de otros",
+    useWhen: "Tienes una duda concreta, quieres ver distintas opiniones o aprender de la experiencia de personas reales.",
+    resources: ["Reddit", "Stack Exchange", "Quora", "Discord", "Meneame", "Foros especializados"],
+    sub: ["Subreddits temáticos (ej: r/learnspanish, r/history)", "Stack Exchange para preguntas técnicas y científicas"],
+    tip: "Consejo: Stack Exchange es especialmente fiable porque la comunidad vota las mejores respuestas. Reddit tiene comunidades para casi cualquier tema imaginable."
+  },
+  {
+    emoji: "🎙️",
+    title: "Podcasts y audiolibros",
+    tagline: "Para aprender mientras haces otra cosa",
+    useWhen: "Quieres aprender mientras vas al trabajo, haces ejercicio o cocinas.",
+    resources: ["Spotify (podcasts)", "iVoox", "Audible"],
+    sub: [],
+    tip: "Consejo: Busca podcasts de divulgación sobre temas que te interesen. Muchos son gratuitos en Spotify o iVoox. Audible es de pago, pero tiene audiolibros narrados profesionalmente."
+  },
+  {
+    emoji: "🌍",
+    title: "Datos oficiales y organismos",
+    tagline: "Para información estadística y científica verificada",
+    useWhen: "Necesitas datos oficiales, estadísticas, informes de organismos internacionales o información científica gubernamental.",
+    resources: ["NASA", "NOAA", "Banco Mundial", "ONU", "Boletines oficiales de gobiernos"],
+    sub: ["NASA: imágenes, datos espaciales y educación científica", "Banco Mundial: datos económicos globales", "ONU: informes y estadísticas sociales"],
+    tip: "Consejo: Estas fuentes son ideales para trabajos serios. Los datos que publican son de acceso libre y están respaldados por investigaciones rigurosas."
+  },
+  {
+    emoji: "📝",
+    title: "Blogs, artículos y charlas",
+    tagline: "Para perspectivas de expertos y divulgación",
+    useWhen: "Quieres leer análisis, opiniones de especialistas o ideas innovadoras en formato artículo o charla.",
+    resources: ["TED Talks", "Medium", "Blogs de expertos"],
+    sub: [],
+    tip: "Consejo: TED Talks son charlas de 15-20 minutos de expertos en miles de temas, subtituladas al español. Medium tiene artículos de divulgación de calidad variable; fíjate en quién escribe."
+  },
+  {
+    emoji: "💻",
+    title: "Código y documentación técnica",
+    tagline: "Para aprender programación y tecnología",
+    useWhen: "Quieres aprender a programar, entender cómo funciona un software o encontrar proyectos de código abierto.",
+    resources: ["GitHub", "Stack Overflow", "MDN Web Docs", "freeCodeCamp"],
+    sub: [],
+    tip: "Consejo: GitHub no es solo para programadores avanzados; tiene muchos repositorios con tutoriales y recursos educativos abiertos."
+  },
+  {
+    emoji: "🗣️",
+    title: "Aprendizaje de idiomas",
+    tagline: "Para aprender o mejorar una lengua extranjera",
+    useWhen: "Quieres aprender un idioma nuevo o mejorar el que ya tienes de forma gradual y entretenida.",
+    resources: ["Duolingo", "Babbel", "Tandem", "Clozemaster", "Language Transfer"],
+    sub: [],
+    tip: "Consejo: Duolingo es gratuito y bueno para empezar. Para progresar de verdad, combínalo con podcasts, series o conversación real con hablantes nativos."
+  },
+  {
+    emoji: "🎬",
+    title: "Documentales y streaming educativo",
+    tagline: "Para aprender de forma visual y entretenida",
+    useWhen: "Prefieres aprender a través de documentales bien producidos sobre ciencia, historia, naturaleza o cultura.",
+    resources: ["YouTube (canales documentales)", "National Geographic", "PBS"],
+    sub: ["National Geographic: naturaleza, ciencia y geografía", "PBS: historia, arte y cultura (muchos con subtítulos)"],
+    tip: "Consejo: Muchos documentales de National Geographic y PBS están disponibles de forma gratuita en YouTube o en sus propios sitios web."
+  },
+  {
+    emoji: "🖼️",
+    title: "Museos virtuales",
+    tagline: "Para explorar arte, historia y cultura desde casa",
+    useWhen: "Quieres visitar colecciones de museos del mundo, ver obras de arte en detalle o explorar exposiciones.",
+    resources: ["Museo del Prado", "Louvre", "British Museum", "Google Arts & Culture"],
+    sub: [],
+    tip: "Consejo: Google Arts & Culture reúne contenido de cientos de museos del mundo en un solo lugar, con recorridos virtuales y zoom de alta resolución en las obras."
+  },
+  {
+    emoji: "🗺️",
+    title: "Herramientas geoespaciales",
+    tagline: "Para explorar el mundo visualmente",
+    useWhen: "Necesitas explorar geografía, entender ubicaciones o estudiar el territorio y los cambios en el planeta.",
+    resources: ["Google Earth", "OpenStreetMap", "NASA Worldview"],
+    sub: [],
+    tip: "Consejo: Google Earth Pro es gratuito y permite ver imágenes históricas del mismo lugar en distintos años, muy útil para estudiar cambios ambientales o urbanos."
+  },
+  {
+    emoji: "📡",
+    title: "Eventos en vivo",
+    tagline: "Para aprender en tiempo real con expertos",
+    useWhen: "Quieres asistir a conferencias, seminarios o clases en directo sobre temas de tu interés.",
+    resources: ["Webinars gratuitos (Eventbrite, Meetup)", "Seminarios universitarios abiertos", "Transmisiones en vivo de congresos"],
+    sub: [],
+    tip: "Consejo: Muchas universidades y organizaciones transmiten eventos académicos gratis por YouTube o Zoom. Busca el nombre del tema + 'webinar gratuito' para encontrar opciones."
+  }
+];
+
+const grid = document.getElementById('grid');
+
+data.forEach((item, i) => {
+  const card = document.createElement('div');
+  card.className = 'card';
+
+  const subHTML = item.sub.length
+    ? `<div style="margin-top:0.6rem"><p class="resources-title">Ejemplos destacados</p><div class="resource-list">${item.sub.map(s => `<span class="resource-tag sub">${s}</span>`).join('')}</div></div>`
+    : '';
+
+  card.innerHTML = `
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-emoji">${item.emoji}</span>
+      <div class="card-title-block">
+        <div class="card-number">Tipo ${String(i+1).padStart(2,'0')}</div>
+        <div class="card-title">${item.title}</div>
+        <div class="card-tagline">${item.tagline}</div>
+      </div>
+      <button class="toggle-btn" aria-label="Expandir">+</button>
+    </div>
+    <div class="card-body">
+      <div class="use-when"><strong>¿Cuándo usarlo?</strong>${item.useWhen}</div>
+      <p class="resources-title">Recursos principales</p>
+      <div class="resource-list">${item.resources.map(r => `<span class="resource-tag">${r}</span>`).join('')}</div>
+      ${subHTML}
+      <p class="tip"><strong>💡 ${item.tip.replace('Consejo: ','')}</strong></p>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+
+function toggle(header) {
+  const body = header.nextElementSibling;
+  const btn = header.querySelector('.toggle-btn');
+  const isOpen = body.classList.toggle('open');
+  btn.textContent = isOpen ? '−' : '+';
+}
+</script>
+</body>
+</html>
